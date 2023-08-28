@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Pictures.Domain.Entities.Picture>
+
+@{
+}
+
+@foreach (var picture in Model)
+{
+	<p>@picture.Id</p>
+	<p>@picture.Name</p>
+	<p>@picture.Address</p>
+	<p>@picture.UserId</p>
+	<p>@picture.User</p>
+}
+
