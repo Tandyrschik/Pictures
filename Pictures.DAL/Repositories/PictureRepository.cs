@@ -7,10 +7,9 @@ namespace Pictures.DAL.Repositories
 	public class PictureRepository : IPictureRepository // индивидуальный класс-обработчик запросов в БД для объектов Picture
 	{                                                  // обращается в БД посредством EntityFramework
 		private readonly PicturesDbContext _context;
-		public PictureRepository(PicturesDbContext context)
-		{
-			_context = context;
-		}
+		public PictureRepository(PicturesDbContext context) => 
+			(_context) = (context);
+
 		public bool Add(Picture picture) 
 		{
 			_context.Add(picture);

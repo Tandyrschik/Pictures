@@ -1,14 +1,27 @@
 ﻿@model IEnumerable<Pictures.Domain.Entities.Picture>
 
 @{
+	ViewData["Title"] = "GetPictures";
 }
+<h1>Pictures</h1>
+@{
+	<div class="pictures-container">
+		<div class="row mt-3" style="">
+			@{
+				foreach (var picture in Model)
+				{
+					<div class="picture-block">
+						<div class="picture-name">
+							<h2>@picture.Name</h2>
+						</div>
 
-@foreach (var picture in Model)
-{
-	<p>@picture.Id</p>
-	<p>@picture.Name</p>
-	<p>@picture.Address</p>
-	<p>@picture.UserId</p>
-	<p>@picture.User</p>
+						<div>
+							<img class="picture" src="@picture.Address" alt="@picture.Name" />
+						</div>
+					</div>
+				}
+			}
+		</div>
+	</div>
 }
 

@@ -1,0 +1,25 @@
+﻿.pictures-container {
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.picture-block {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    max-height: 500px;
+    max-width: 300px;
+}
+
+.picture-name {
+    max-width: 300px;
+    max-height: 50px;
+}
+
+.picture {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}

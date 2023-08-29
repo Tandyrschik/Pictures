@@ -12,10 +12,8 @@ namespace Pictures.Services.Classes
 	{                                            // действия в БД совершаются классом Response, объект этого же класса возвращает
 												// полученные данные и информацию о том как прошла операция
 		private readonly IPictureRepository _pictureRepository;
-		public PictureService(IPictureRepository pictureRepository)
-		{
-			_pictureRepository = pictureRepository;
-		}
+		public PictureService(IPictureRepository pictureRepository) =>
+			(_pictureRepository) = (pictureRepository);
 
 		// Добавить картинку
 		public IResponse<PictureViewModel> AddPicture(PictureViewModel pictureViewModel)
@@ -26,9 +24,9 @@ namespace Pictures.Services.Classes
 				var picture = new Picture
 				{
 					Address = pictureViewModel.Address,
-					Name =    pictureViewModel.Name,
-					UserId =  pictureViewModel.UserId,
-					User =    pictureViewModel.User,
+					Name = pictureViewModel.Name,
+					UserId = pictureViewModel.UserId,
+					User = pictureViewModel.User,
 				};
 
 				_pictureRepository.Add(picture);
@@ -52,7 +50,7 @@ namespace Pictures.Services.Classes
 			try
 			{
 				var picture = _pictureRepository.GetById(id);
-				if (picture == null)
+				if (picture is null)
 				{
 					response.Description = "No picture found.";
 					response.StatusCode = StatusCode.PictureNotFound;
@@ -81,7 +79,7 @@ namespace Pictures.Services.Classes
 			try
 			{
 				var picture = _pictureRepository.GetById(id);
-				if (picture == null)
+				if (picture is null)
 				{
 					response.Description = "No picture found.";
 					response.StatusCode = StatusCode.PictureNotFound;
@@ -111,7 +109,7 @@ namespace Pictures.Services.Classes
 			{
 				var pictures = _pictureRepository.GetAll();
 
-				if (pictures.Count() == 0)
+				if (pictures.Count() is 0)
 				{
 					response.Description = "Ни один элемент не найден.";
 					response.StatusCode = StatusCode.PictureNotFound;
