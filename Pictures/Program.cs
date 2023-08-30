@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages() // установил пакет Razor.RuntimeCompilation чтобы не перезапускать приложение
+	.AddRazorRuntimeCompilation(); // каждый раз после изменений html файлов
+
 builder.Services.AddDbContext<PicturesDbContext>(options =>
 		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

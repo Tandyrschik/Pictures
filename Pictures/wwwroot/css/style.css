@@ -1,4 +1,7 @@
-﻿.pictures-container {
+﻿
+/*pictures*/
+
+.pictures-container {
     width: 1200px;
     margin: auto;
     text-align: center;
@@ -14,6 +17,7 @@
 }
 
 .picture-name {
+    margin-top: 4px;
     max-width: 300px;
     max-height: 50px;
 }
@@ -22,4 +26,59 @@
     width: 300px;
     height: 300px;
     object-fit: cover;
+}
+
+.scale {
+    overflow: hidden; 
+}
+    .scale img {
+        transition: 2s; 
+    }
+        .scale img:hover {
+            transform: scale(1.1); 
+        }
+            .scale img:hover:active {
+                transform: scale(1.2);
+            }
+
+
+
+.mfp-content {
+    animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/*popup*/
+
+.mfp-with-zoom.mfp-container,
+.mfp-with-zoom.mfp-bg {
+    opacity: 0;
+    -webkit-backface-visibility: hidden;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    object-fit: cover;
+}
+
+.mfp-with-zoom.mfp-ready.mfp-container {
+    opacity: 1;
+}
+
+.mfp-with-zoom.mfp-ready.mfp-bg {
+    opacity: 0.8;
+}
+
+.mfp-with-zoom.mfp-removing.mfp-container,
+.mfp-with-zoom.mfp-removing.mfp-bg {
+    opacity: 0;
 }
