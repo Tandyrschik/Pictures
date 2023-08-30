@@ -15,11 +15,17 @@
                             <h2>@picture.Name</h2>
                         </div>
 
-                        <a class="image-popup-no-margins" href="@picture.Address">
-                            <div class="scale">
-                                <img class="picture scale" src="@picture.Address" alt="@picture.Name">
-                            </div>
+                        <a class="" href="@picture.Address">
+                            <img class="picture scaled" src="@picture.Address" alt="@picture.Name">
                         </a>
+
+                        <div id="popup-link" class="popup-container">
+                            <div class="popup-body">
+                                <div class="popup-content">
+                                <a href="" class="popup-close"></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 }
             }
