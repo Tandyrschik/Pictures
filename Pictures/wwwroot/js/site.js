@@ -1,5 +1,7 @@
 ﻿
 // css reload functions
+
+// css reload functions
 var DeveloperTool = {
     Init: function () {
         this.headObj =
@@ -28,42 +30,3 @@ var DeveloperTool = {
         return this;
     }
 };
-
-// popup functions
-
-$(document).ready(function () {
-
-	$('.image-popup-vertical-fit').magnificPopup({
-		type: 'image',
-		closeOnContentClick: true,
-		mainClass: 'mfp-img-mobile',
-		image: {
-			verticalFit: true
-		}
-
-	});
-
-	$('.image-popup-fit-width').magnificPopup({
-		type: 'image',
-		closeOnContentClick: true,
-		image: {
-			verticalFit: false
-		}
-	});
-
-	$('.image-popup-no-margins').magnificPopup({
-		type: 'image',
-		closeOnContentClick: true,
-		closeBtnInside: false,
-		fixedContentPos: true,
-		mainClass: 'mfp-no-margins', // class to remove default margin from left and right side
-		image: {
-			verticalFit: true
-		},
-		zoom: {
-			enabled: false,
-			duration: 1000 // don't foget to change the duration also in CSS
-		},
-	});
-
-});

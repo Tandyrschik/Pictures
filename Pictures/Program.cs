@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Pictures.DAL;
 using Pictures.DAL.Interfaces;
 using Pictures.DAL.Repositories;
+using Pictures.Domain.Entities;
 using Pictures.Services.Classes;
 using Pictures.Services.Interfaces;
 
