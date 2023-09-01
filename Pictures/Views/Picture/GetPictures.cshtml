@@ -6,7 +6,7 @@
 <h1>Pictures</h1>
 @{
     <div class="pictures-container">
-        <div class="row mt-3" style="">
+        <div class="row mt-3">
             @{
                 foreach (var picture in Model)
                 {
@@ -15,14 +15,17 @@
                             <h2>@picture.Name</h2>
                         </div>
 
-                        <a class="" href="@picture.Address">
-                            <img class="picture scaled" src="@picture.Address" alt="@picture.Name">
+                        <a class="picture scaled" href="#@picture.Address">
+                            <img class="picture" src="@picture.Address" alt="@picture.Name">
                         </a>
 
-                        <div id="popup-link" class="popup-container">
+                        <div id="@picture.Address" class="popup-container">
                             <div class="popup-body">
-                                <div class="popup-content">
-                                <a href="" class="popup-close"></a>
+                                <a href="#return" class="popup-area"></a>
+                                <div class="popup-content-image">
+                                    <img class="popup-image" src="@picture.Address" alt="@picture.Name">
+                                    <a href="#return" class="popup-close"><img src="~/icons/close-window-cross.png" style="width:20px;"></a>
+                                    <div class="popup-image-text">@picture.Name</div>
                                 </div>
                             </div>
                         </div>
