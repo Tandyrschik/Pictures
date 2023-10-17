@@ -1,7 +1,6 @@
 ﻿
 // css reload functions
 
-// css reload functions
 var DeveloperTool = {
     Init: function () {
         this.headObj =

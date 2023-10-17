@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Pictures.Services\Pictures.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\NotoSerif\" />
+  </ItemGroup>
+
 </Project>

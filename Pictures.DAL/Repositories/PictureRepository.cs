@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
 using Pictures.DAL.Interfaces;
 using Pictures.Domain.Entities;
 
 namespace Pictures.DAL.Repositories
 {
-	public class PictureRepository : IPictureRepository // индивидуальный класс-обработчик запросов в БД для объектов Picture
-	{                                                  // обращается в БД посредством EntityFramework
+	public class PictureRepository : IRepository<Picture> // индивидуальный класс-обработчик запросов в БД для объектов Picture
+	{                                                    // обращается в БД посредством EntityFramework
 		private readonly PicturesDbContext _context;
 		public PictureRepository(PicturesDbContext context) => 
 			(_context) = (context);
@@ -33,7 +33,6 @@ namespace Pictures.DAL.Repositories
 		{
 			return _context.Picture.ToList();
 		}
-
 
 	}
 }

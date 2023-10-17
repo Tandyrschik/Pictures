@@ -7,7 +7,7 @@ namespace Pictures.Domain.Entities
 		public int Id { get; set; }
 		public string Address { get; set; }
 		public string Name { get; set; }
-		public int UserId { get; set; }
-		public User User { get; set; } // связывание, одна картинка принадлежит одному пользователю.
+		public int AccountId { get; set; }
+		public Account Account { get; set; } // связывание, одна картинка принадлежит одному пользователю.
 	}
 }

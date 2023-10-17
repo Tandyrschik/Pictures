@@ -11,8 +11,8 @@ namespace Pictures.Services.Classes
 	public class PictureService : IPictureService // в этом случае - сервиc - посредник между контроллерами и операциями с репозиторием.
 	{                                            // действия в БД совершаются классом Response, объект этого же класса возвращает
 												// полученные данные и информацию о том как прошла операция
-		private readonly IPictureRepository _pictureRepository;
-		public PictureService(IPictureRepository pictureRepository) =>
+		private readonly IRepository<Picture> _pictureRepository;
+		public PictureService(IRepository<Picture> pictureRepository) =>
 			(_pictureRepository) = (pictureRepository);
 
 		// Добавить картинку
@@ -25,8 +25,7 @@ namespace Pictures.Services.Classes
 				{
 					Address = pictureViewModel.Address,
 					Name = pictureViewModel.Name,
-					UserId = pictureViewModel.UserId,
-					User = pictureViewModel.User,
+                    AccountId = pictureViewModel.AccountId
 				};
 
 				_pictureRepository.Add(picture);

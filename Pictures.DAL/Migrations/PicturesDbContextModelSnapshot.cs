@@ -21,119 +21,7 @@ namespace Pictures.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Pictures.Domain.Entities.Picture", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Picture");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "/img/lotos.jpg",
-                            Name = "Lotos",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "/img/night city.jpg",
-                            Name = "Night city",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "/img/puppy.jpg",
-                            Name = "Puppy",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "/img/snowflake.jpg",
-                            Name = "Snowflake",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Address = "/img/misty forest.jpg",
-                            Name = "Misty forest",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Address = "/img/rabbit.jpg",
-                            Name = "Rabbit",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Address = "/img/tulip.jpg",
-                            Name = "Tulip",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Address = "/img/zurich.jpg",
-                            Name = "Zurich",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Address = "/img/evening sea.jpg",
-                            Name = "Evening sea",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Address = "/img/bear.jpg",
-                            Name = "Bear",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Address = "/img/cat.jpg",
-                            Name = "Cat",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Address = "/img/helix nebula.jpg",
-                            Name = "Helix nebula",
-                            UserId = 2
-                        });
-                });
-
-            modelBuilder.Entity("Pictures.Domain.Entities.User", b =>
+            modelBuilder.Entity("Pictures.Domain.Entities.Account", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,7 +54,7 @@ namespace Pictures.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Account");
 
                     b.HasData(
                         new
@@ -193,16 +81,128 @@ namespace Pictures.DAL.Migrations
 
             modelBuilder.Entity("Pictures.Domain.Entities.Picture", b =>
                 {
-                    b.HasOne("Pictures.Domain.Entities.User", "User")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Picture");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccountId = 1,
+                            Address = "/img/lotos.jpg",
+                            Name = "Lotos"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccountId = 1,
+                            Address = "/img/night city.jpg",
+                            Name = "Night city"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccountId = 1,
+                            Address = "/img/puppy.jpg",
+                            Name = "Puppy"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccountId = 1,
+                            Address = "/img/snowflake.jpg",
+                            Name = "Snowflake"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AccountId = 1,
+                            Address = "/img/misty forest.jpg",
+                            Name = "Misty forest"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AccountId = 1,
+                            Address = "/img/rabbit.jpg",
+                            Name = "Rabbit"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AccountId = 2,
+                            Address = "/img/tulip.jpg",
+                            Name = "Tulip"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AccountId = 2,
+                            Address = "/img/zurich.jpg",
+                            Name = "Zurich"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AccountId = 2,
+                            Address = "/img/evening sea.jpg",
+                            Name = "Evening sea"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AccountId = 2,
+                            Address = "/img/bear.jpg",
+                            Name = "Bear"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AccountId = 2,
+                            Address = "/img/cat.jpg",
+                            Name = "Cat"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AccountId = 2,
+                            Address = "/img/helix nebula.jpg",
+                            Name = "Helix nebula"
+                        });
+                });
+
+            modelBuilder.Entity("Pictures.Domain.Entities.Picture", b =>
+                {
+                    b.HasOne("Pictures.Domain.Entities.Account", "Account")
                         .WithMany("Pictures")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Account");
                 });
 
-            modelBuilder.Entity("Pictures.Domain.Entities.User", b =>
+            modelBuilder.Entity("Pictures.Domain.Entities.Account", b =>
                 {
                     b.Navigation("Pictures");
                 });

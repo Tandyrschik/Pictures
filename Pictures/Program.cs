@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Pictures.DAL;
 using Pictures.DAL.Interfaces;
@@ -16,8 +17,18 @@ builder.Services.AddRazorPages() // установил пакет Razor.RuntimeCompilation что
 builder.Services.AddDbContext<PicturesDbContext>(options =>
 		options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddTransient<IPictureRepository, PictureRepository>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme) // подключение авторизации (куки)
+    .AddCookie(options =>
+    {
+        options.LoginPath = new PathString("/Account/Login");
+        options.AccessDeniedPath = new PathString("/Account/Login");
+    });
+
+builder.Services.AddTransient<IRepository<Picture>, PictureRepository>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>(); // подключение репозитория аккаунта
+
 builder.Services.AddTransient<IPictureService, PictureService>();
+builder.Services.AddTransient<IAccountService, AccountService>(); // подключение сервиса аккаунта
 
 var app = builder.Build();
 
@@ -25,7 +36,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
 	app.UseExceptionHandler("/Home/Error");
-	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 	app.UseHsts();
 }
 
@@ -35,6 +45,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication(); // подключение авторизации
 
 app.MapControllerRoute(
 	name: "default",
