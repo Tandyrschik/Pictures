@@ -114,3 +114,7 @@ button {
 button:hover {
     background-color: white;
 }
+
+.without-borders {
+    border: none;
+}

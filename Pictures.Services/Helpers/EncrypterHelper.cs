@@ -1,24 +1,20 @@
 ﻿
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Pictures.Domain.Helpers
 {
-    public class EncrypterHelper // ширование пароля для безопасности данных методом Key Derivation Function
+    public class EncrypterHelper // ширование пароля для безопасности данных
     {
         public static string Encrypt(string password)
         {
-            byte[] salt;
-            byte[] buffer;
-
-            using (Rfc2898DeriveBytes bytes = new(password, 0x10, 0x3e8))
+            using (var sha256 = SHA256.Create())
             {
-                salt = bytes.Salt;
-                buffer = bytes.GetBytes(0x20);
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+
+                return hash;
             }
-            byte[] dst = new byte[0x31];
-            Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
-            Buffer.BlockCopy(buffer, 0, dst, 0x11, 0x20);
-            return Convert.ToBase64String(dst);
         }
     }
 }
