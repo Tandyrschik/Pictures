@@ -1,4 +1,5 @@
 ﻿
+using Pictures.Domain.Entities;
 using Pictures.Domain.Interfaces;
 using Pictures.Domain.ViewModels.Account;
 using Pictures.Domain.ViewModels.Picture;
@@ -10,5 +11,6 @@ namespace Pictures.Services.Interfaces
     {
         IResponse<ClaimsIdentity> Register(RegistrationViewModel model);
         IResponse<ClaimsIdentity> Login(LoginViewModel model);
+        Account GetAccountByLogin(string login);
     }
 }

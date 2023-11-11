@@ -29,3 +29,26 @@ var DeveloperTool = {
         return this;
     }
 };
+
+// вывод загруженного изображения на страницу
+
+function previewFile() {
+    var preview = document.querySelector("img");
+    var file = document.querySelector("input[type=file]").files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
+    };
+
+    var fileName = file.name,
+        parts, ext = (parts = fileName.split("/").pop().split(".")).length > 1 ? parts.pop() : "";
+
+    ext = ext.toUpperCase();
+
+    if (ext == "PNG" || ext == "JPG" || ext == "JPEG") {
+        reader.readAsDataURL(file);
+    } else {
+        alert("Invalid file type. Accepted types: jpg, jpeg, png");
+    }
+}

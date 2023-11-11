@@ -20,7 +20,7 @@ namespace Pictures.Controllers
         [HttpPost]
         public IActionResult Registration(RegistrationViewModel model)
         {
-            if(ModelState.IsValid) // закомментировал чтобы не сохранять в бд
+            if(ModelState.IsValid)
             {
                 var response = _accountService.Register(model);
                 if (response.StatusCode is Domain.Enums.StatusCode.Success)
@@ -28,7 +28,7 @@ namespace Pictures.Controllers
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(response.Data));
 
-                    return RedirectToAction("GetPictures", "Picture");
+                    return RedirectToAction("MyPictures", "Picture");
                 }
                 ModelState.AddModelError("", response.Description);
             }
@@ -50,7 +50,7 @@ namespace Pictures.Controllers
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(response.Data));
 
-                    return RedirectToAction("GetPictures", "Picture");
+                    return RedirectToAction("MyPictures", "Picture");
                 }
                 ModelState.AddModelError("", response.Description);
             }

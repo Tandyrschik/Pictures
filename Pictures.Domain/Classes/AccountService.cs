@@ -1,4 +1,5 @@
-﻿using Pictures.DAL.Interfaces;
+﻿using Microsoft.Identity.Client;
+using Pictures.DAL.Interfaces;
 using Pictures.Domain.Entities;
 using Pictures.Domain.Enums;
 using Pictures.Domain.Helpers;
@@ -13,12 +14,13 @@ namespace Pictures.Services.Classes
     public class AccountService : IAccountService
     {
         private readonly IAccountRepository _accountRepository;
-        public AccountService(IAccountRepository accountRepository) =>
-            (_accountRepository) = (accountRepository);
+        public AccountService(IAccountRepository accountRepository)
+        {
+            _accountRepository = accountRepository;
+        }
 
         public IResponse<ClaimsIdentity> Register(RegistrationViewModel model)
         {
-            //_accountRepository.Remove(_accountRepository.GetById(3));
             try
             {
                 var accountIsExist = _accountRepository.GetByLogin(model.Login);
@@ -106,6 +108,11 @@ namespace Pictures.Services.Classes
                     StatusCode = StatusCode.ServerError
                 };
             }
+        }
+
+        public Account GetAccountByLogin(string login)
+        {
+            return _accountRepository.GetByLogin(login);
         }
 
         private ClaimsIdentity Authenticate(Account account)

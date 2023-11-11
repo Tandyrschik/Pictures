@@ -1,4 +1,6 @@
-﻿using Pictures.DAL.Interfaces;
+﻿
+using Microsoft.AspNetCore.Identity;
+using Pictures.DAL.Interfaces;
 using Pictures.Domain.Entities;
 using Pictures.Domain.Enums;
 using Pictures.Domain.Interfaces;
@@ -8,15 +10,15 @@ using Pictures.Services.Interfaces;
 
 namespace Pictures.Services.Classes
 {
-	public class PictureService : IPictureService // в этом случае - сервиc - посредник между контроллерами и операциями с репозиторием.
+	public class PictureService : IPictureService // сервиc - посредник между контроллерами и операциями с репозиторием.
 	{                                            // действия в БД совершаются классом Response, объект этого же класса возвращает
 												// полученные данные и информацию о том как прошла операция
 		private readonly IRepository<Picture> _pictureRepository;
 		public PictureService(IRepository<Picture> pictureRepository) =>
 			(_pictureRepository) = (pictureRepository);
 
-		// Добавить картинку
-		public IResponse<PictureViewModel> AddPicture(PictureViewModel pictureViewModel)
+        // Добавить картинку
+        public IResponse<PictureViewModel> AddPicture(PictureViewModel pictureViewModel)
 		{
 			var response = new Response<PictureViewModel>();
 			try
@@ -26,7 +28,7 @@ namespace Pictures.Services.Classes
 					Address = pictureViewModel.Address,
 					Name = pictureViewModel.Name,
                     AccountId = pictureViewModel.AccountId
-				};
+                };
 
 				_pictureRepository.Add(picture);
 				response.StatusCode = StatusCode.Success;

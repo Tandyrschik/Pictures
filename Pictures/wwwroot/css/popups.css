@@ -69,21 +69,22 @@
         color: white;
     }
 
-.popup-close {
+.close-cross {
     position: absolute; /*закрывающий крестик распологается относительно "popup-content" */
     right: 0px;
     top: 0px;
     max-height: 20px;
     max-width: 20px;
     transition: 0.5s;
+    z-index:1;
 }
 
-    .popup-close img {
+    .close-cross img {
         display: flex;
         justify-content: center;
     }
 
-    .popup-close:hover {
+    .close-cross:hover {
         background-color: white;
     }
 

@@ -6,14 +6,14 @@ namespace Pictures.Domain.ViewModels.Account
     public class RegistrationViewModel
     {
         [Required(ErrorMessage = "Enter login")]
-        [MaxLength(20, ErrorMessage = "Login length should not be more than 15 characters")]
+        [MaxLength(20, ErrorMessage = "Login length should not be more than 20 characters")]
         [MinLength(3, ErrorMessage = "Login length should not be less than 3 characters")]
         public string Login { get; set; }
 
 
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Enter password")]
-        [MaxLength(20, ErrorMessage = "Password length should not be more than 15 characters")]
+        [MaxLength(20, ErrorMessage = "Password length should not be more than 20 characters")]
         [MinLength(6, ErrorMessage = "Password length should not be less than 6 characters")]
         public string Password { get; set; }
 
@@ -26,6 +26,7 @@ namespace Pictures.Domain.ViewModels.Account
 
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "Enter email")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Invalid address")]
         [MaxLength(30, ErrorMessage = "Email length should not be more than 30 characters")]
         public string Email { get; set; }
 

@@ -21,7 +21,6 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
     height: 100%;
 }
 
@@ -31,16 +30,17 @@ body {
 }
 
 main {
-    position: relative;
     max-width: 100%;
     min-height: 100%;
+    padding-bottom: 70px;
 }
 
 footer {
-/*    position: fixed;*/
+    position: fixed;
     bottom: 0;
     width: 100vw;
     height: 56px;
+    margin-top: -56px;
     margin: 16px 0 0;
     padding: 14px;
     background-color: white;
@@ -50,4 +50,4 @@ footer {
 @font-face {
     font-family: "NotoSerifTC-Bold";
     src: url("../fonts/NotoSerif/NotoSerifTC-Regular.otf") format("truetype");
-} 
+}

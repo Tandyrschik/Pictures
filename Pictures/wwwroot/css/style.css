@@ -1,6 +1,4 @@
 ﻿
-/*pictures*/
-
 .pictures-container {
     width: 1200px;
     margin: auto;
@@ -23,16 +21,15 @@
 }
 
 .picture {
+    position: relative;
     width: 300px;
     height: 300px;
     object-fit: cover;
-
     transition: 0.5s;
 }
 
     .picture.scaled:hover {
         box-shadow: black 0px 0px 5px 0px;
-        z-index: 1;
     }
 
 .scaled {
@@ -48,10 +45,39 @@
             transform: scale(1.1);
         }
 
+.delete-cross {
+}
+
+.delete-cross-button {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 0px;
+    height: 20px;
+    width: 20px;
+    border: 0;
+    background: transparent;
+    transition: 0.5s;
+    z-index: 1;
+}
+    .delete-cross-button img {
+        display: flex;
+        justify-content: center;
+    }
+    .delete-cross-button:hover {
+        background-color: red;
+    }
+
 .main-form {
     margin-left: auto;
     margin-right: auto;
     max-width: 300px;
+}
+
+.add-picture-form {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
 }
 
 .input-element {
@@ -84,7 +110,7 @@
             box-shadow: 0px 0px 5px 1px rgb(234, 234, 234);
         }
 
-    .input-element span {
+    .warning-message {
         margin-left: 5px;
         color: rgb(225, 0, 0);
     }
@@ -97,7 +123,35 @@ input:not(:placeholder-shown) { /* к заполненному полю прим
     background-color: rgb(255, 255, 255);
 }
 
-button {
+.add-picture-input-element {
+    height: 44px;
+    width: 200px;
+}
+
+.add-picture-form {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+}
+
+    .add-picture-form * {
+        margin-top: 5px;
+    }
+
+.image-preview {
+    margin-top: 5px;
+    max-width: 900px;
+    max-height: 600px;
+    box-shadow: 0px 0px 2px 0px rgb(234, 234, 234);
+}
+
+label {
+    cursor: pointer;
+}
+
+.button-sumbit {
     display: flex;
     height: 2em;
     margin-top: 5px;
@@ -111,9 +165,9 @@ button {
     transition: 0.3s;
 }
 
-button:hover {
-    background-color: white;
-}
+    .button-sumbit:hover {
+        background-color: white;
+    }
 
 .without-borders {
     border: none;

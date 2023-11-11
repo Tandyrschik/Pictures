@@ -7,47 +7,47 @@
 <h1>Registration</h1>
 @{
     <div>
-        <form asp-controller="Account" asp-action="Registration" class="main-form">
+        <form class="main-form" asp-controller="Account" asp-action="Registration">
 
             <div class="validation" asp-validation-summary="ModelOnly"></div>
             <div class="input-element">
                 <p>Name:</p>
 
                 <input placeholder="" maxlength="50" asp-for="Name">
-                <span asp-validation-for="Name"></span>
+                <span class="warning-message" asp-validation-for="Name"></span>
             </div>
             <div class="input-element">
                 <p>Surname:</p>
 
                 <input placeholder="" maxlength="50" asp-for="Surname">
-                <span asp-validation-for="Surname"></span>
+                <span class="warning-message" asp-validation-for="Surname"></span>
             </div>
             <div class="input-element">
                 <p>Login:</p>
 
                 <input placeholder="" maxlength="50" asp-for="Login">
-                <span asp-validation-for="Login"></span>
+                <span class="warning-message" asp-validation-for="Login"></span>
             </div>
             <div class="input-element">
                 <p>Password:</p>
 
                 <input placeholder="" maxlength="50"  type="password" asp-for="Password">
-                <span asp-validation-for="Password"></span>
+                <span class="warning-message" asp-validation-for="Password"></span>
             </div>
             <div class="input-element">
                 <p>Confirm password:</p>
 
                 <input placeholder="" maxlength="50"  type="password" asp-for="PasswordConfirm">
-                <span asp-validation-for="PasswordConfirm"></span>
+                <span class="warning-message" asp-validation-for="PasswordConfirm"></span>
             </div>
             <div class="input-element">
                 <p>E-mail:</p>
 
                 <input placeholder="" maxlength="50" asp-for="Email">
-                <span asp-validation-for="Email"></span>
+                <span class="warning-message" asp-validation-for="Email"></span>
             </div>
             <div>
-                <button type="submit">Confirm</button>
+                <button class="button-sumbit" type="submit">Confirm</button>
             </div>
         </form>
     </div>

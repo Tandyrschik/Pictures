@@ -1,0 +1,34 @@
+﻿@model Pictures.Domain.ViewModels.Picture.PictureViewModel
+
+@{
+    ViewData["Title"] = "AddPicture";
+}
+<h1>Add Picture</h1>
+@{
+    <div>
+        <form class="add-picture-form" asp-action="AddPicture" asp-controller="Picture" enctype="multipart/form-data">
+
+            <label asp-for="ImageFile">
+                <input class="overflow-hidden visually-hidden" asp-for="ImageFile" onchange="previewFile()">
+                <span class="button-sumbit">Select a picture (jpg, jpeg, png)</span>
+            </label>
+
+            <div class="input-element add-picture-input-element">
+                <input placeholder="Name:" maxlength="15" asp-for="Name">
+            </div>
+
+            <div>
+                <button class="button-sumbit" type="submit">Save</button>
+            </div>
+        </form>
+
+        <div class="add-picture-form">
+            <span class="warning-message" asp-validation-for="ImageFile"></span>
+            <span class="warning-message" asp-validation-for="Name"></span>
+        </div>
+
+        <div class="add-picture-form">
+            <img class="image-preview" src="" />
+        </div>
+    </div>
+}

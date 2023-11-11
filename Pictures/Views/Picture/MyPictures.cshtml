@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Pictures.Domain.Entities.Picture>
 
 @{
-    ViewData["Title"] = "GetPictures";
+    ViewData["Title"] = "My Pictures";
 }
-<h1>Pictures</h1>
+<h1>My Pictures</h1>
 @{
     <div class="pictures-container ">
         <div class="row mt-3">
@@ -15,16 +15,21 @@
                             <h2>@picture.Name</h2>
                         </div>
 
-                        <a class="picture scaled" href="#@picture.Address">
-                            <img class="picture" src="@picture.Address" alt="@picture.Name">
-                        </a>
+                        <div class="picture scaled">
+                            <form asp-action="RemovePicture">
+                                <button class="delete-cross-button" name="id" value="@picture.Id"><img src="~/icons/close-window-cross-black.png" style="width:20px;"></button>
+                            </form>
+                            <a class="picture scaled" href="#@picture.Address">
+                                <img class="picture" src="@picture.Address" alt="@picture.Name">
+                            </a>
+                        </div>
 
                         <div id="@picture.Address" class="popup-container">
                             <div class="popup-body">
                                 <a href="#return" class="popup-area"></a>
                                 <div class="popup-content-image">
                                     <img class="popup-image" src="@picture.Address" alt="@picture.Name">
-                                    <a href="#return" class="popup-close"><img src="~/icons/close-window-cross.png" style="width:20px;"></a>
+                                    <a href="#return" class="close-cross"><img src="~/icons/close-window-cross-black.png" style="width:20px;"></a>
                                     <div class="popup-image-text">@picture.Name</div>
                                 </div>
                             </div>
