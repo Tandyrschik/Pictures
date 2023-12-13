@@ -1,8 +1,39 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<Pictures.Domain.Entities.Picture>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    ViewData["Title"] = "Home";
+}
+<h1>My Pictures</h1>
+@{
+    <div class="pictures-container">
+        <div class="row mt-3">
+            @{
+                foreach (var picture in Model)
+                {
+                    <div class="picture-block">
+                        <div class="picture-name">
+                            <h2>@picture.Name</h2>
+                        </div>
+
+                        <div class="picture scaled">
+                            <a class="picture scaled" href="#@picture.Address">
+                                <img class="picture" src="@picture.Address" alt="@picture.Name">
+                            </a>
+                        </div>
+
+                        <div id="@picture.Address" class="popup-container">
+                            <div class="popup-body">
+                                <a href="#return" class="popup-area"></a>
+                                <div class="popup-content-image">
+                                    <img class="popup-image" src="@picture.Address" alt="@picture.Name">
+                                    <a href="#return" class="close-cross"><img src="~/icons/close-window-cross-black.png" style="width:20px;"></a>
+                                    <div class="popup-image-text">@picture.Name</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}

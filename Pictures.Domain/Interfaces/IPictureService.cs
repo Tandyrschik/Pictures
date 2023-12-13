@@ -6,9 +6,10 @@ namespace Pictures.Services.Interfaces
 {
 	public interface IPictureService
 	{
-		IResponse<PictureViewModel> AddPicture(PictureViewModel pictureViewModel);
-		IResponse<bool> RemovePicture(int id);
-		IResponse<Picture> GetPicture(int id);
-		IResponse<IEnumerable<Picture>> GetPictures();
-	}
+		Task<IResponse<PictureViewModel>> AddPicture(PictureViewModel pictureViewModel);
+		Task<IResponse<bool>> RemovePicture(int id);
+		Task<IResponse<Picture>> GetPicture(int id);
+		Task<IResponse<IEnumerable<Picture>>> GetAllPictures();
+		Task<IResponse<IEnumerable<Picture>>> GetPicturesOfAccount(int accountId);
+    }
 }

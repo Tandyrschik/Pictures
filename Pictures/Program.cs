@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Pictures.DAL;
 using Pictures.DAL.Interfaces;
 using Pictures.DAL.Repositories;
-using Pictures.Domain.Entities;
 using Pictures.Services.Classes;
 using Pictures.Services.Interfaces;
 
@@ -24,7 +23,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = new PathString("/Account/Login");
     });
 
-builder.Services.AddTransient<IRepository<Picture>, PictureRepository>();
+builder.Services.AddTransient<IPictureRepository, PictureRepository>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>(); // подключение репозитория аккаунта
 
 builder.Services.AddTransient<IPictureService, PictureService>();

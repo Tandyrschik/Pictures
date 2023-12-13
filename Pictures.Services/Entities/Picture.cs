@@ -8,6 +8,6 @@ namespace Pictures.Domain.Entities
 		public string Address { get; set; }
 		public string Name { get; set; }
 		public int AccountId { get; set; }
-		public Account Account { get; set; } // связывание, одна картинка принадлежит одному пользователю.
+		public Account Account { get; set; }
 	}
 }

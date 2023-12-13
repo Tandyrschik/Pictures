@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Pictures.Domain.ViewModels.Picture;
 using Pictures.Services.Interfaces;
-using Pictures.Http;
 using System.Text;
-using Microsoft.AspNetCore.Http;
 
 namespace Pictures.Controllers
 {
@@ -22,20 +20,27 @@ namespace Pictures.Controllers
         }
 
         [HttpGet]
-        public IActionResult MyPictures()
+        public async Task<IActionResult> MyPictures()
         {
-            var response = _pictureService.GetPictures();
+            string login = HttpContext.User.Claims.First().Value;
+            var account = await _accountService.GetAccountByLogin(login);
+
+            var response = await _pictureService.GetPicturesOfAccount(account.Id);
             if (response.StatusCode is Domain.Enums.StatusCode.Success)
             {
                 return View(response.Data);
+            }
+            if (response.StatusCode is Domain.Enums.StatusCode.PictureNotFound)
+            {
+                return RedirectToAction("AddPicture");
             }
             else return RedirectToAction("Error");
         }
 
         [HttpPost]
-        public IActionResult RemovePicture(int id)
+        public async Task<IActionResult> RemovePicture(int id)
         {
-            var response = _pictureService.RemovePicture(id);
+            var response = await _pictureService.RemovePicture(id);
             if (response.StatusCode is Domain.Enums.StatusCode.Success)
             {
                 return RedirectToAction("MyPictures");
@@ -47,13 +52,13 @@ namespace Pictures.Controllers
         public IActionResult AddPicture() => View(new PictureViewModel());
 
         [HttpPost]
-        public IActionResult AddPicture(PictureViewModel model)
+        public async Task<IActionResult> AddPicture(PictureViewModel model)
         {
             if (ModelState.IsValid)
             {
                 // получить id аккаунта для привязки изображений к аккаунту
                 string login = HttpContext.User.Claims.First().Value;
-                var account = _accountService.GetAccountByLogin(login);
+                var account = await _accountService.GetAccountByLogin(login);
 
                 model.AccountId = account.Id;
 
@@ -65,12 +70,12 @@ namespace Pictures.Controllers
                 // сохранение файла в папку с проектом
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    model.ImageFile.CopyTo(fileStream);
+                    await model.ImageFile.CopyToAsync(fileStream);
                 }
 
                 model.Address = "/img/" + uniqueFileName;
 
-                var response = _pictureService.AddPicture(model);
+                var response = await _pictureService.AddPicture(model);
                 if (response.StatusCode is Domain.Enums.StatusCode.Success)
                 {
                     return RedirectToAction("MyPictures");

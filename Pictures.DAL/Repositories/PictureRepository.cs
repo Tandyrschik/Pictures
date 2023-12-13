@@ -1,38 +1,43 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using Pictures.DAL.Interfaces;
 using Pictures.Domain.Entities;
 
 namespace Pictures.DAL.Repositories
 {
-	public class PictureRepository : IRepository<Picture> // индивидуальный класс-обработчик запросов в БД для объектов Picture
+	public class PictureRepository : IPictureRepository  // индивидуальный класс-обработчик запросов в БД для объектов Picture
 	{                                                    // обращается в БД посредством EntityFramework
 		private readonly PicturesDbContext _context;
 		public PictureRepository(PicturesDbContext context) => 
 			(_context) = (context);
 
-		public bool Add(Picture picture) 
+		public async Task<bool> Add(Picture picture) 
 		{
-			_context.Add(picture);
-			_context.SaveChanges();
+			await _context.AddAsync(picture);
+			await _context.SaveChangesAsync();
 
 			return true;
 		}
 
-		public bool Remove(Picture picture)
+		public async Task<bool> Remove(Picture picture)
 		{
 			_context.Remove(picture);
-			_context.SaveChanges();
+			await _context.SaveChangesAsync();
 
 			return true;
 		}
-		public Picture GetById(int id)
+		public async Task<Picture> GetById(int id)
 		{
-			return _context.Picture.FirstOrDefault(p => p.Id == id);
+			return await _context.Picture.FirstOrDefaultAsync(p => p.Id == id);
 		}
-		public IEnumerable<Picture> GetAll()
+		public async Task<IEnumerable<Picture>> GetAll()
 		{
-			return _context.Picture.ToList();
+			return await _context.Picture.ToListAsync();
 		}
+        public async Task<IEnumerable<Picture>> GetAllOfAccount(int accountId)
+        {
+            return await _context.Picture.Where(x => x.AccountId == accountId).ToListAsync();
+        }
 
-	}
+    }
 }

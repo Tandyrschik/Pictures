@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using Pictures.DAL.Interfaces;
 using Pictures.Domain.Entities;
 
@@ -10,40 +11,40 @@ namespace Pictures.DAL.Repositories
         public AccountRepository(PicturesDbContext context) =>
             (_context) = (context);
 
-        public bool Add(Account entity)
+        public async Task<bool> Add(Account entity)
         {
-            _context.Add(entity);
-            _context.SaveChanges();
+            await _context.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return true;
         }
 
-        public bool Remove(Account entity)
+        public async Task<bool> Remove(Account entity)
         {
             _context.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return true;
         }
 
-        public Account GetById(int id)
+        public async Task<Account> GetById(int id)
         {
-            return _context.Account.FirstOrDefault(a => a.Id == id);
+            return await _context.Account.FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public Account GetByLogin(string login)
+        public async Task<Account> GetByLogin(string login)
         {
-            return _context.Account.FirstOrDefault(a => a.Login == login);
+            return await _context.Account.FirstOrDefaultAsync(a => a.Login == login);
         }
 
-        public Account GetByEmail(string email)
+        public async Task<Account> GetByEmail(string email)
         {
-            return _context.Account.FirstOrDefault(a => a.Email == email);
+            return await _context.Account.FirstOrDefaultAsync(a => a.Email == email);
         }
 
-        public IEnumerable<Account> GetAll()
+        public async Task<IEnumerable<Account>> GetAll()
         {
-            return _context.Account.ToList();
+            return await _context.Account.ToListAsync();
         }
 
     }

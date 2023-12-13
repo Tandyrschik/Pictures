@@ -18,14 +18,14 @@ namespace Pictures.Controllers
         public IActionResult Registration() => View();
 
         [HttpPost]
-        public IActionResult Registration(RegistrationViewModel model)
+        public async Task<IActionResult> Registration(RegistrationViewModel model)
         {
             if(ModelState.IsValid)
             {
-                var response = _accountService.Register(model);
+                var response = await _accountService.Register(model);
                 if (response.StatusCode is Domain.Enums.StatusCode.Success)
                 {
-                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(response.Data));
 
                     return RedirectToAction("MyPictures", "Picture");
@@ -40,14 +40,14 @@ namespace Pictures.Controllers
         public IActionResult Login() => View();
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var response = _accountService.Login(model);
+                var response = await _accountService.Login(model);
                 if (response.StatusCode is Domain.Enums.StatusCode.Success)
                 {
-                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(response.Data));
 
                     return RedirectToAction("MyPictures", "Picture");
@@ -60,9 +60,9 @@ namespace Pictures.Controllers
         // Выход из учётной записи
 
         [ValidateAntiForgeryToken]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
     }

@@ -9,8 +9,8 @@ namespace Pictures.Services.Interfaces
 {
     public interface IAccountService
     {
-        IResponse<ClaimsIdentity> Register(RegistrationViewModel model);
-        IResponse<ClaimsIdentity> Login(LoginViewModel model);
-        Account GetAccountByLogin(string login);
+        Task<IResponse<ClaimsIdentity>> Register(RegistrationViewModel model);
+        Task<IResponse<ClaimsIdentity>> Login(LoginViewModel model);
+        Task<Account> GetAccountByLogin(string login);
     }
 }

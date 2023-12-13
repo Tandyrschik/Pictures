@@ -12,6 +12,6 @@ namespace Pictures.Domain.Entities
 		public string Name { get; set; }
 		public string Surname { get; set; }
 		public Role Role { get; set; }
-		public ICollection<Picture> Pictures { get; set; } // связывание, один пользователь может иметь множество картинок.
+		public ICollection<Picture> Pictures { get; set; }
 	}
 }

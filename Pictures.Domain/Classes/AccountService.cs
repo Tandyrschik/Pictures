@@ -1,5 +1,4 @@
-﻿using Microsoft.Identity.Client;
-using Pictures.DAL.Interfaces;
+﻿using Pictures.DAL.Interfaces;
 using Pictures.Domain.Entities;
 using Pictures.Domain.Enums;
 using Pictures.Domain.Helpers;
@@ -19,11 +18,11 @@ namespace Pictures.Services.Classes
             _accountRepository = accountRepository;
         }
 
-        public IResponse<ClaimsIdentity> Register(RegistrationViewModel model)
+        public async Task<IResponse<ClaimsIdentity>> Register(RegistrationViewModel model)
         {
             try
             {
-                var accountIsExist = _accountRepository.GetByLogin(model.Login);
+                var accountIsExist = await _accountRepository.GetByLogin(model.Login);
                 if (accountIsExist is not null)
                 {
                     return new Response<ClaimsIdentity>()
@@ -32,7 +31,7 @@ namespace Pictures.Services.Classes
                     };
                 }
 
-                accountIsExist = _accountRepository.GetByEmail(model.Email);
+                accountIsExist = await _accountRepository.GetByEmail(model.Email);
                 if (accountIsExist is not null)
                 {
                     return new Response<ClaimsIdentity>()
@@ -51,7 +50,7 @@ namespace Pictures.Services.Classes
                     Role = Role.DefаultUser
                 };
 
-                _accountRepository.Add(account);
+                await _accountRepository.Add(account);
                 var claims = Authenticate(account);
 
                 return new Response<ClaimsIdentity>()
@@ -71,11 +70,11 @@ namespace Pictures.Services.Classes
             }
         }
 
-        public IResponse<ClaimsIdentity> Login(LoginViewModel model)
+        public async Task<IResponse<ClaimsIdentity>> Login(LoginViewModel model)
         {
             try
             {
-                var account = _accountRepository.GetByLogin(model.Login);
+                var account = await _accountRepository.GetByLogin(model.Login);
                 if (account is null)
                 {
                     return new Response<ClaimsIdentity>()
@@ -110,9 +109,9 @@ namespace Pictures.Services.Classes
             }
         }
 
-        public Account GetAccountByLogin(string login)
+        public async Task<Account> GetAccountByLogin(string login)
         {
-            return _accountRepository.GetByLogin(login);
+            return await _accountRepository.GetByLogin(login);
         }
 
         private ClaimsIdentity Authenticate(Account account)
