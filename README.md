@@ -22,7 +22,3 @@ This project is an ASP.NET Core web application designed for managing pictures a
 ## Contributing
 
 Contributions are welcome! If you have any ideas or suggestions for new features, feel free to open an issue or a pull request on the GitHub repository.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
