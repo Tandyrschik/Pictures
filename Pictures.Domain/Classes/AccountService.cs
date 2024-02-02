@@ -1,12 +1,13 @@
 ﻿using Pictures.DAL.Interfaces;
 using Pictures.Domain.Entities;
 using Pictures.Domain.Enums;
-using Pictures.Domain.Helpers;
 using Pictures.Domain.Interfaces;
 using Pictures.Domain.Responses;
 using Pictures.Domain.ViewModels.Account;
 using Pictures.Services.Interfaces;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Pictures.Services.Classes
 {
@@ -22,28 +23,30 @@ namespace Pictures.Services.Classes
         {
             try
             {
-                var accountIsExist = await _accountRepository.GetByLogin(model.Login);
-                if (accountIsExist is not null)
+                var login = await _accountRepository.GetByLogin(model.Login);
+                if (login is not null)
                 {
                     return new Response<ClaimsIdentity>()
                     {
-                        Description = "An account with the specified login already exists"
+                        Description = "An account with the specified login already exists",
+                        StatusCode = StatusCode.SpecifiedDataExist
                     };
                 }
 
-                accountIsExist = await _accountRepository.GetByEmail(model.Email);
-                if (accountIsExist is not null)
+                var email = await _accountRepository.GetByEmail(model.Email);
+                if (email is not null)
                 {
                     return new Response<ClaimsIdentity>()
                     {
-                        Description = "An account with the specified email already exists"
+                        Description = "An account with the specified email already exists",
+                        StatusCode = StatusCode.SpecifiedDataExist
                     };
                 }
 
                 var account = new Account
                 {
                     Login = model.Login,
-                    Password = EncrypterHelper.Encrypt(model.Password),
+                    Password = Encrypt(model.Password),
                     Email = model.Email,
                     Name = model.Name,
                     Surname = model.Surname,
@@ -51,6 +54,7 @@ namespace Pictures.Services.Classes
                 };
 
                 await _accountRepository.Add(account);
+
                 var claims = Authenticate(account);
 
                 return new Response<ClaimsIdentity>()
@@ -79,23 +83,25 @@ namespace Pictures.Services.Classes
                 {
                     return new Response<ClaimsIdentity>()
                     {
-                        Description = "Account not found"
+                        Description = "Account not found",
+                        StatusCode = StatusCode.NotFound
                     };
                 }
 
-                if (account.Password != EncrypterHelper.Encrypt(model.Password))
+                if (account.Password != Encrypt(model.Password))
                 {
                     return new Response<ClaimsIdentity>()
                     {
-                        Description = "Incorrect password"
+                        Description = "Incorrect password",
+                        StatusCode = StatusCode.IncorrectData
                     };
                 }
 
-                var result = Authenticate(account);
+                var claims = Authenticate(account);
 
                 return new Response<ClaimsIdentity>()
                 {
-                    Data = result,
+                    Data = claims,
                     StatusCode = StatusCode.Success
                 };
             }
@@ -114,7 +120,7 @@ namespace Pictures.Services.Classes
             return await _accountRepository.GetByLogin(login);
         }
 
-        private ClaimsIdentity Authenticate(Account account)
+        private static ClaimsIdentity Authenticate(Account account)
         {
             var claims = new List<Claim>
             {
@@ -123,6 +129,17 @@ namespace Pictures.Services.Classes
             };
             return new ClaimsIdentity(claims, "ApplicationCookie",
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+        }
+
+        public static string Encrypt(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+
+                return hash;
+            }
         }
     }
 }

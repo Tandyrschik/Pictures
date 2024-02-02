@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pictures.DAL
 {
-    public class PicturesDbContext : DbContext // класс для запросов в БД, базовый класс предоставлен Entity Framework
+    public class PicturesDbContext : DbContext
     {
         public PicturesDbContext(DbContextOptions<PicturesDbContext> options) : base(options)
         {
@@ -12,7 +12,7 @@ namespace Pictures.DAL
             //Database.EnsureCreated();
         }
 
-        public DbSet<Picture> Picture { get; set; } // каждое поле DbSet<T> - таблица в БД, колонки таблицы описываются в классе <T>
+        public DbSet<Picture> Picture { get; set; }
         public DbSet<Account> Account { get; set; }
     }
 }

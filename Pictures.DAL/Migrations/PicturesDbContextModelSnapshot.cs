@@ -54,29 +54,7 @@ namespace Pictures.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "Alex@mail.com",
-                            Login = "Alex123",
-                            Name = "Alex",
-                            Password = "12345",
-                            Role = 0,
-                            Surname = "Xela"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "Daniel@mail.com",
-                            Login = "Daniel321",
-                            Name = "Daniel",
-                            Password = "54321",
-                            Role = 0,
-                            Surname = "Lainad"
-                        });
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("Pictures.Domain.Entities.Picture", b =>
@@ -102,93 +80,7 @@ namespace Pictures.DAL.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.ToTable("Picture");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccountId = 1,
-                            Address = "/img/lotos.jpg",
-                            Name = "Lotos"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccountId = 1,
-                            Address = "/img/night city.jpg",
-                            Name = "Night city"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccountId = 1,
-                            Address = "/img/puppy.jpg",
-                            Name = "Puppy"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccountId = 1,
-                            Address = "/img/snowflake.jpg",
-                            Name = "Snowflake"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AccountId = 1,
-                            Address = "/img/misty forest.jpg",
-                            Name = "Misty forest"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AccountId = 1,
-                            Address = "/img/rabbit.jpg",
-                            Name = "Rabbit"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AccountId = 2,
-                            Address = "/img/tulip.jpg",
-                            Name = "Tulip"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AccountId = 2,
-                            Address = "/img/zurich.jpg",
-                            Name = "Zurich"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AccountId = 2,
-                            Address = "/img/evening sea.jpg",
-                            Name = "Evening sea"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AccountId = 2,
-                            Address = "/img/bear.jpg",
-                            Name = "Bear"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            AccountId = 2,
-                            Address = "/img/cat.jpg",
-                            Name = "Cat"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            AccountId = 2,
-                            Address = "/img/helix nebula.jpg",
-                            Name = "Helix nebula"
-                        });
+                    b.ToTable("Pictures");
                 });
 
             modelBuilder.Entity("Pictures.Domain.Entities.Picture", b =>

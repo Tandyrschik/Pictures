@@ -7,10 +7,10 @@ namespace Pictures.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<PictureController> _logger;
         private readonly IPictureService _pictureService;
 
-        public HomeController(ILogger<HomeController> logger, IPictureService pictureService)
+        public HomeController(ILogger<PictureController> logger, IPictureService pictureService)
         {
             _logger = logger;
             _pictureService = pictureService;

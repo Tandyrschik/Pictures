@@ -1,5 +1,6 @@
 ﻿
 using Pictures.Domain.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pictures.Domain.Entities
 {

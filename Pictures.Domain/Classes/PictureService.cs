@@ -1,5 +1,4 @@
 ﻿
-using Microsoft.AspNetCore.Identity;
 using Pictures.DAL.Interfaces;
 using Pictures.Domain.Entities;
 using Pictures.Domain.Enums;
@@ -7,17 +6,16 @@ using Pictures.Domain.Interfaces;
 using Pictures.Domain.Responses;
 using Pictures.Domain.ViewModels.Picture;
 using Pictures.Services.Interfaces;
+using System.Text;
 
 namespace Pictures.Services.Classes
 {
-	public class PictureService : IPictureService // сервиc - посредник между контроллерами и операциями с репозиторием.
-	{                                            // действия в БД совершаются классом Response, объект этого же класса возвращает
-												// полученные данные и информацию о том как прошла операция
+	public class PictureService : IPictureService
+	{                                            
 		private readonly IPictureRepository _pictureRepository;
 		public PictureService(IPictureRepository pictureRepository) =>
 			(_pictureRepository) = (pictureRepository);
 
-        // Добавить картинку
         public async Task<IResponse<PictureViewModel>> AddPicture(PictureViewModel pictureViewModel)
 		{
 			var response = new Response<PictureViewModel>();
@@ -44,7 +42,6 @@ namespace Pictures.Services.Classes
 			}
 		}
 
-		// Удалить картинку
 		public async Task<IResponse<bool>> RemovePicture(int id)
 		{
 			var response = new Response<bool>();
@@ -54,12 +51,13 @@ namespace Pictures.Services.Classes
 				if (picture is null)
 				{
 					response.Description = "No picture found.";
-					response.StatusCode = StatusCode.PictureNotFound;
+					response.StatusCode = StatusCode.NotFound;
 				}
 				else
 				{
 					await _pictureRepository.Remove(picture);
-					response.StatusCode = StatusCode.Success;
+                    response.Description = "The picture has been removed";
+                    response.StatusCode = StatusCode.Success;
 				}
 				return response;
 			}
@@ -73,7 +71,6 @@ namespace Pictures.Services.Classes
 			}
 		}
 
-		// Получить картинку
 		public async Task<IResponse<Picture>> GetPicture(int id)
 		{
 			var response = new Response<Picture>();
@@ -83,7 +80,7 @@ namespace Pictures.Services.Classes
 				if (picture is null)
 				{
 					response.Description = "No picture found.";
-					response.StatusCode = StatusCode.PictureNotFound;
+					response.StatusCode = StatusCode.NotFound;
 				}
 				else
 				{
@@ -102,7 +99,6 @@ namespace Pictures.Services.Classes
 			}
 		}
 
-		// Получить коллекцию картинок
 		public async Task<IResponse<IEnumerable<Picture>>> GetAllPictures()
 		{
 			var response = new Response<IEnumerable<Picture>>();
@@ -112,8 +108,8 @@ namespace Pictures.Services.Classes
 
 				if (pictures.Count() is 0)
 				{
-					response.Description = "Ни один элемент не найден.";
-					response.StatusCode = StatusCode.PictureNotFound;
+					response.Description = "No picture found.";
+					response.StatusCode = StatusCode.NotFound;
 				}
 				else
 				{
@@ -126,24 +122,23 @@ namespace Pictures.Services.Classes
 			{
 				return new Response<IEnumerable<Picture>>()
 				{
-					Description = $"[Get Pictures] : {ex.Message}",
+					Description = $"[GetAllPictures] : {ex.Message}",
 					StatusCode = StatusCode.ServerError
 				};
 			}
 		}
 
-        // Получить коллекцию картинок одного аккаунта
         public async Task<IResponse<IEnumerable<Picture>>> GetPicturesOfAccount(int accountId)
         {
             var response = new Response<IEnumerable<Picture>>();
             try
             {
-                var pictures = await _pictureRepository.GetAllOfAccount(accountId);
+                var pictures = await _pictureRepository.GetAll(accountId);
 
                 if (pictures.Count() is 0)
                 {
-                    response.Description = "Ни один элемент не найден.";
-                    response.StatusCode = StatusCode.PictureNotFound;
+                    response.Description = "No picture found.";
+                    response.StatusCode = StatusCode.NotFound;
                 }
                 else
                 {

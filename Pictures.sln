@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pictures", "Pictures\Pictures.csproj", "{7DB19439-3AC0-4CD2-BA79-FADC4C7BBD83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pictures", "Pictures\Pictures.csproj", "{7DB19439-3AC0-4CD2-BA79-FADC4C7BBD83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{BF0C3CB1-09A0-40A4-B257-894EA9941A81}"
 EndProject
@@ -11,11 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{39EC6997-BED6-488E-9793-931D006A9FB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pictures.Services", "Pictures.Domain\Pictures.Services.csproj", "{5F1FC31C-A753-4BEA-A24F-57524C1649CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pictures.Services", "Pictures.Domain\Pictures.Services.csproj", "{5F1FC31C-A753-4BEA-A24F-57524C1649CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pictures.DAL", "Pictures.DAL\Pictures.DAL.csproj", "{759C732C-EA62-4147-B538-0FCEC09FB7D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pictures.DAL", "Pictures.DAL\Pictures.DAL.csproj", "{759C732C-EA62-4147-B538-0FCEC09FB7D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pictures.Domain", "Pictures.Services\Pictures.Domain.csproj", "{04F9B650-08B3-471C-9452-F3B28F8F9302}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pictures.Domain", "Pictures.Services\Pictures.Domain.csproj", "{04F9B650-08B3-471C-9452-F3B28F8F9302}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{47BBF190-416B-4C1E-8A8D-4F0B9BF0F809}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pictures.UnitTests", "Pictures.UnitTests\Pictures.UnitTests.csproj", "{25ADF2FD-0C2E-4BE5-B1DE-81E616408131}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{04F9B650-08B3-471C-9452-F3B28F8F9302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04F9B650-08B3-471C-9452-F3B28F8F9302}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04F9B650-08B3-471C-9452-F3B28F8F9302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25ADF2FD-0C2E-4BE5-B1DE-81E616408131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25ADF2FD-0C2E-4BE5-B1DE-81E616408131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25ADF2FD-0C2E-4BE5-B1DE-81E616408131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25ADF2FD-0C2E-4BE5-B1DE-81E616408131}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +55,7 @@ Global
 		{5F1FC31C-A753-4BEA-A24F-57524C1649CD} = {4EB65782-88BA-440A-A2D2-F1D029B51B74}
 		{759C732C-EA62-4147-B538-0FCEC09FB7D7} = {39EC6997-BED6-488E-9793-931D006A9FB0}
 		{04F9B650-08B3-471C-9452-F3B28F8F9302} = {BF0C3CB1-09A0-40A4-B257-894EA9941A81}
+		{25ADF2FD-0C2E-4BE5-B1DE-81E616408131} = {47BBF190-416B-4C1E-8A8D-4F0B9BF0F809}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A2CB00F-D4D2-4AAA-B328-9A0ABF2EE1C3}

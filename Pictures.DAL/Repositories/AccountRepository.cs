@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Pictures.DAL.Interfaces;
 using Pictures.Domain.Entities;
+using Pictures.Domain.Enums;
+using Pictures.Domain.Responses;
 
 namespace Pictures.DAL.Repositories
 {
@@ -46,6 +48,5 @@ namespace Pictures.DAL.Repositories
         {
             return await _context.Account.ToListAsync();
         }
-
     }
 }

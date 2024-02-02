@@ -10,7 +10,7 @@ namespace Pictures.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
-        public AccountController(IAccountService accountService) => 
+        public AccountController(IAccountService accountService) =>
             (_accountService) = (accountService);
 
         // Регистрация пользователя
@@ -20,14 +20,12 @@ namespace Pictures.Controllers
         [HttpPost]
         public async Task<IActionResult> Registration(RegistrationViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var response = await _accountService.Register(model);
                 if (response.StatusCode is Domain.Enums.StatusCode.Success)
                 {
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(response.Data));
-
+                    await SignInAsync(response.Data);
                     return RedirectToAction("MyPictures", "Picture");
                 }
                 ModelState.AddModelError("", response.Description);
@@ -35,7 +33,6 @@ namespace Pictures.Controllers
             return View(model);
         }
 
-        // Вход в учётную запись
         [HttpGet]
         public IActionResult Login() => View();
 
@@ -47,9 +44,7 @@ namespace Pictures.Controllers
                 var response = await _accountService.Login(model);
                 if (response.StatusCode is Domain.Enums.StatusCode.Success)
                 {
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                        new ClaimsPrincipal(response.Data));
-
+                    await SignInAsync(response.Data);
                     return RedirectToAction("MyPictures", "Picture");
                 }
                 ModelState.AddModelError("", response.Description);
@@ -57,13 +52,22 @@ namespace Pictures.Controllers
             return View(model);
         }
 
-        // Выход из учётной записи
-
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+
+        private async Task SignInAsync(ClaimsIdentity claims)
+        {
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+              new ClaimsPrincipal(claims));
+        }
+        private async Task SignOutAsync()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
 }

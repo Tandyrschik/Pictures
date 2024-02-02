@@ -34,7 +34,7 @@ namespace Pictures.DAL.Repositories
 		{
 			return await _context.Picture.ToListAsync();
 		}
-        public async Task<IEnumerable<Picture>> GetAllOfAccount(int accountId)
+        public async Task<IEnumerable<Picture>> GetAll(int accountId)
         {
             return await _context.Picture.Where(x => x.AccountId == accountId).ToListAsync();
         }

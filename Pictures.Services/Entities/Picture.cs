@@ -1,8 +1,9 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pictures.Domain.Entities
 {
-	public class Picture // описание сущности в коде и в таблице БД, где каждое свойство равно колонке в таблице
+    public class Picture // описание сущности в коде и в таблице БД, где каждое свойство - колонка в таблице
 	{
 		public int Id { get; set; }
 		public string Address { get; set; }
