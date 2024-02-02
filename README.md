@@ -1,6 +1,7 @@
 # Picture
 
 This project is an ASP.NET Core web application designed for managing pictures and user accounts. It provides functionalities to store pictures in a database and allows users to create their accounts.
+(To view the latest changes to the project, go to the development branch.)
 
 ## Features
 
