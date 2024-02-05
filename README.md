@@ -19,6 +19,19 @@ This project is an ASP.NET Core web application designed for managing pictures a
 - **xUnit**: The project contains unit tests for controllers, services and repositories.
 - **Moq**: This framework is used to test аll complex classes.
 
+## Launch guide
+- **Install .NET 7 packages**(SDK 7.0.405, ASP.NET Core Runtime 7.0.15, .NET Runtime 7.0.15) from: https://dotnet.microsoft.com/en-us/download/dotnet/7.0 
+- **Download Visual Studio 2022 Community**: https://visualstudio.microsoft.com/ru/vs/community/
+- **Open Installer and click on checkmark with ASP.NET package and install program**:
+![alt text](https://github.com/Tandyrschik/Tandyrschik/blob/main/1.png?raw=true)
+- **Download project.zip from develop branch**: https://github.com/Tandyrschik/Pictures/tree/develop
+- **Extract .zip to your repos directory**, open folder "Pictures-develop", open file Pictures.sln to start visual studio project.
+- **In visual studio click (1) to open nested list, select IIS Express (2)**.
+![alt text](https://github.com/Tandyrschik/Tandyrschik/blob/main/2.png?raw=true)
+- **Click to this button to start program**.
+![alt text](https://github.com/Tandyrschik/Tandyrschik/blob/main/3.png?raw=true)
+
+
 ## Contributing
 
 Contributions are welcome! If you have any ideas or suggestions for new features, feel free to open an issue or a pull request on the GitHub repository.
